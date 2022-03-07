@@ -1,3 +1,4 @@
+import 'package:codelab2_news_app/detail_page.dart';
 import 'package:flutter/material.dart';
 
 //Model
@@ -19,7 +20,12 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity),
         initialRoute: NewsListPage.routeName,
-        routes: {NewsListPage.routeName: (context) => const NewsListPage()});
+        routes: {
+          NewsListPage.routeName: (context) => const NewsListPage(),
+          ArticleDetailPage.routeName: (context) => ArticleDetailPage(
+                article: ModalRoute.of(context)?.settings.arguments as Article,
+              )
+        });
   }
 }
 
@@ -51,8 +57,13 @@ class NewsListPage extends StatelessWidget {
 
 Widget _buildArticleItem(BuildContext context, Article article) {
   return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      leading: Image.network(article.urlToImage, width: 100),
-      title: Text(article.title),
-      subtitle: Text(article.author));
+    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    leading: Image.network(article.urlToImage, width: 100),
+    title: Text(article.title),
+    subtitle: Text(article.author),
+    onTap: () {
+      Navigator.pushNamed(context, ArticleDetailPage.routeName,
+          arguments: article);
+    },
+  );
 }
