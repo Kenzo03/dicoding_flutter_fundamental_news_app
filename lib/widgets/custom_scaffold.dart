@@ -1,10 +1,33 @@
 import 'package:flutter/material.dart';
 
 class CustomScaffold extends StatelessWidget {
-  const CustomScaffold({Key? key}) : super(key: key);
+  final Widget body;
+  const CustomScaffold({Key? key, required this.body}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+        body: SafeArea(
+            child: Stack(
+      children: [
+        body,
+        Card(
+            margin: EdgeInsets.all(0),
+            child: Row(mainAxisSize: MainAxisSize.min, children: [
+              IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+              Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child:
+                      Text('N', style: Theme.of(context).textTheme.headline6))
+            ]),
+            shape: BeveledRectangleBorder(
+                borderRadius:
+                    BorderRadius.only(bottomRight: Radius.circular(16))))
+      ],
+    )));
   }
 }
