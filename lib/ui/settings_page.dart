@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import './widgets/platform_widgets.dart';
+import '../widgets/platform_widgets.dart';
 
 class SettingsPage extends StatelessWidget {
+  static const String settingsTitle = 'Settings';
   const SettingsPage({Key? key}) : super(key: key);
 
   @override

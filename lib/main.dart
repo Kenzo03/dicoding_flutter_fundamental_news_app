@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import './model/article.dart';
-import './detail_page.dart';
-import './home_page.dart';
-import './styles.dart';
+import './ui/article_detail_page.dart';
+import './ui/article_web_view.dart';
+import './ui/home_page.dart';
+import 'common/styles.dart';
 
 void main() {
   runApp(const MyApp());
