@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 class NewsListPage extends StatelessWidget {
   static const routeName = '/article_list';
 
+  const NewsListPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('News App'),
+        title: const Text('News App'),
       ),
       body: FutureBuilder<String>(
         future:

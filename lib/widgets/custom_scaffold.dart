@@ -15,10 +15,10 @@ class CustomScaffold extends StatelessWidget {
 
   Card _buildShortAppBar(BuildContext context) {
     return Card(
-        margin: EdgeInsets.all(0),
+        margin: const EdgeInsets.all(0),
         child: Row(mainAxisSize: MainAxisSize.min, children: [
           IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);
               }),
@@ -26,7 +26,7 @@ class CustomScaffold extends StatelessWidget {
               padding: const EdgeInsets.only(right: 16),
               child: Text('N', style: Theme.of(context).textTheme.headline6))
         ]),
-        shape: BeveledRectangleBorder(
+        shape: const BeveledRectangleBorder(
             borderRadius: BorderRadius.only(bottomRight: Radius.circular(16))));
   }
 }

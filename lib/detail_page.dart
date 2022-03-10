@@ -8,7 +8,7 @@ class ArticleDetailPage extends StatelessWidget {
 
   final Article article;
 
-  const ArticleDetailPage({required this.article});
+  const ArticleDetailPage({Key? key, required this.article}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +67,7 @@ class ArticleWebView extends StatelessWidget {
 
   final String url;
 
-  const ArticleWebView({required this.url});
+  const ArticleWebView({Key? key, required this.url}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
