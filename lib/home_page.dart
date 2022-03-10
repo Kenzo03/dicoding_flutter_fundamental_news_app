@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import './article_list_page.dart';
 import './widgets/platform_widgets.dart';
+import './settings_page.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
@@ -17,11 +18,9 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildAndroid(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('News App'),
-        ),
-        body:
-            bottomNavIndex == 0 ? const ArticleListPage() : const Placeholder(),
+        body: bottomNavIndex == 0
+            ? const ArticleListPage()
+            : const SettingsPage(),
         bottomNavigationBar: BottomNavigationBar(
             currentIndex: bottomNavIndex,
             items: const [
@@ -49,7 +48,7 @@ class _HomePageState extends State<HomePage> {
             case 0:
               return const ArticleListPage();
             case 1:
-              return const Placeholder();
+              return const SettingsPage();
             default:
               return const ArticleListPage();
           }
