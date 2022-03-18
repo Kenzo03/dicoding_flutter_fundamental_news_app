@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:codelab2_news_app/data/api/api_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import './article_list_page.dart';
 import '../widgets/platform_widgets.dart';
 import './settings_page.dart';
+import '../provider/news_provider.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
@@ -37,7 +40,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<Widget> _listWidget = [
-    const ArticleListPage(),
+    ChangeNotifierProvider<NewsProvider>(
+      create: (_) => NewsProvider(apiService: ApiService()),
+      child: const ArticleListPage(),
+    ),
     const SettingsPage(),
   ];
 
