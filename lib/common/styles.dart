@@ -4,6 +4,62 @@ import 'package:google_fonts/google_fonts.dart';
 const Color primaryColor = Color(0xFFFFFFFF);
 const Color secondaryColor = Color(0xFF6B38FB);
 
+const Color darkPrimaryColor = Color(0xFF000000);
+const Color darkSecondaryColor = Color(0xff64ffda);
+
+ThemeData lightTheme = ThemeData(
+  primaryColor: primaryColor,
+  secondaryHeaderColor: secondaryColor,
+  scaffoldBackgroundColor: Colors.white,
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  textTheme: myTextTheme,
+  appBarTheme: const AppBarTheme(
+    titleTextStyle: TextStyle(color: Colors.black),
+    elevation: 0,
+  ),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    selectedItemColor: secondaryColor,
+    unselectedItemColor: Colors.grey,
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      primary: secondaryColor,
+      textStyle: const TextStyle(),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(0),
+        ),
+      ),
+    ),
+  ),
+);
+
+ThemeData darkTheme = ThemeData.dark().copyWith(
+  primaryColor: darkPrimaryColor,
+  secondaryHeaderColor: darkSecondaryColor,
+  visualDensity: VisualDensity.adaptivePlatformDensity,
+  textTheme: myTextTheme,
+  appBarTheme: const AppBarTheme(
+    titleTextStyle: TextStyle(color: Colors.white),
+    elevation: 0,
+  ),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    selectedItemColor: darkSecondaryColor,
+    unselectedItemColor: Colors.grey,
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      primary: secondaryColor,
+      textStyle: const TextStyle(),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(0),
+        ),
+      ),
+    ),
+  ),
+);
+
 final TextTheme myTextTheme = TextTheme(
   headline1: GoogleFonts.merriweather(
       fontSize: 92, fontWeight: FontWeight.w300, letterSpacing: -1.5),
