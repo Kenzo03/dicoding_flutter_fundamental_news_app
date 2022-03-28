@@ -1,16 +1,13 @@
 import 'dart:io';
 
-import '../data/api/api_service.dart';
-import '../provider/scheduling_provider.dart';
 import '../utils/notification_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import './article_list_page.dart';
 import '../widgets/platform_widgets.dart';
 import './settings_page.dart';
-import '../provider/news_provider.dart';
 import './article_detail_page.dart';
+import './bookmarks_page.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
@@ -35,6 +32,11 @@ class _HomePageState extends State<HomePage> {
       icon: Icon(Platform.isIOS ? CupertinoIcons.settings : Icons.settings),
       label: SettingsPage.settingsTitle,
     ),
+    BottomNavigationBarItem(
+        icon: Icon(Platform.isIOS
+            ? CupertinoIcons.bookmark
+            : Icons.collections_bookmark),
+        label: BookmarksPage.bookmarksTitle),
   ];
 
   void _onBottomNavTapped(int index) {
@@ -44,14 +46,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<Widget> _listWidget = [
-    ChangeNotifierProvider<NewsProvider>(
-      create: (_) => NewsProvider(apiService: ApiService()),
-      child: const ArticleListPage(),
-    ),
-    ChangeNotifierProvider<SchedulingProvider>(
-      create: (_) => SchedulingProvider(),
-      child: const SettingsPage(),
-    ),
+    const ArticleListPage(),
+    BookmarksPage(),
+    const SettingsPage(),
   ];
 
   Widget _buildAndroid(BuildContext context) {

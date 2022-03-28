@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import '../widgets/card_article.dart';
 import '../widgets/platform_widgets.dart';
 import '../provider/news_provider.dart';
+import '../utils/result_state.dart';
 
 class ArticleListPage extends StatelessWidget {
   const ArticleListPage({Key? key}) : super(key: key);

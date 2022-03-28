@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+import './provider/scheduling_provider.dart';
 import './common/navigation.dart';
 
 import './utils/background_service.dart';
@@ -13,6 +14,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import './provider/preferens_provider.dart';
 import './data/api/api_service.dart';
 import './provider/news_provider.dart';
+import './data/db/database_helper.dart';
+import './provider/database_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './data/model/article.dart';
@@ -50,7 +53,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => NewsProvider(apiService: ApiService()),
         ),
-        // ChangeNotifierProvider(create: (_) => SchedulingProvider()),
+        ChangeNotifierProvider(create: (_) => SchedulingProvider()),
+        ChangeNotifierProvider(
+            create: (_) => DatabaseProvider(databaseHelper: DatabaseHelper())),
         ChangeNotifierProvider(
           create: (_) => PreferencesProvider(
             preferencesHelper: PreferencesHelper(
@@ -66,7 +71,10 @@ class MyApp extends StatelessWidget {
           navigatorKey: navigatorKey,
           builder: (context, child) {
             return CupertinoTheme(
-                data: const CupertinoThemeData(),
+                data: const CupertinoThemeData(
+                  brightness: Brightness.light,
+                  //provider.isDarkTheme ? Brightness.dark : Brightness.light,
+                ),
                 child: Material(child: child));
           },
           initialRoute: HomePage.routeName,

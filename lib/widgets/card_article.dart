@@ -1,6 +1,9 @@
+import 'package:provider/provider.dart';
+
 import '../ui/article_detail_page.dart';
 import 'package:flutter/material.dart';
 import '../data/model/article.dart';
+import '../provider/database_provider.dart';
 import '../common/styles.dart';
 import '../common/navigation.dart';
 
@@ -10,18 +13,39 @@ class CardArticle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-        color: primaryColor,
-        child: ListTile(
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          leading: Hero(
-              tag: article.urlToImage!,
-              child: Image.network(article.urlToImage!, width: 100)),
-          title: Text(article.title),
-          subtitle: Text(article.author!),
-          onTap: () =>
-              Navigation.intentWithData(ArticleDetailPage.routeName, article),
-        ));
+    return Consumer<DatabaseProvider>(
+      builder: (context, provider, child) {
+        return FutureBuilder<bool>(
+          future: provider.isBookmarked(article.url),
+          builder: (context, snapshot) {
+            var isBookmarked = snapshot.data ?? false;
+            return Material(
+                color: primaryColor,
+                child: ListTile(
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  leading: Hero(
+                      tag: article.urlToImage!,
+                      child: Image.network(article.urlToImage!, width: 100)),
+                  title: Text(article.title),
+                  subtitle: Text(article.author!),
+                  trailing: isBookmarked
+                      ? IconButton(
+                          icon: const Icon(Icons.bookmark),
+                          color: Theme.of(context).colorScheme.secondary,
+                          onPressed: () => provider.removeBookmark(article.url),
+                        )
+                      : IconButton(
+                          icon: const Icon(Icons.bookmark_border),
+                          color: Theme.of(context).colorScheme.secondary,
+                          onPressed: () => provider.addBookmark(article),
+                        ),
+                  onTap: () => Navigation.intentWithData(
+                      ArticleDetailPage.routeName, article),
+                ));
+          },
+        );
+      },
+    );
   }
 }
