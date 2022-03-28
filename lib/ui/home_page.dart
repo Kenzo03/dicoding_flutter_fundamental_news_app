@@ -1,6 +1,8 @@
 import 'dart:io';
 
-import 'package:codelab2_news_app/data/api/api_service.dart';
+import '../data/api/api_service.dart';
+import '../provider/scheduling_provider.dart';
+import '../utils/notification_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +10,7 @@ import './article_list_page.dart';
 import '../widgets/platform_widgets.dart';
 import './settings_page.dart';
 import '../provider/news_provider.dart';
+import './article_detail_page.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home_page';
@@ -21,6 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _bottomNavIndex = 0;
   static const String _headlineText = 'Headline';
+  final NotificationHelper _notificationHelper = NotificationHelper();
 
   final List<BottomNavigationBarItem> _bottomNavBarItems = [
     BottomNavigationBarItem(
@@ -44,7 +48,10 @@ class _HomePageState extends State<HomePage> {
       create: (_) => NewsProvider(apiService: ApiService()),
       child: const ArticleListPage(),
     ),
-    const SettingsPage(),
+    ChangeNotifierProvider<SchedulingProvider>(
+      create: (_) => SchedulingProvider(),
+      child: const SettingsPage(),
+    ),
   ];
 
   Widget _buildAndroid(BuildContext context) {
@@ -65,13 +72,20 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _notificationHelper
+        .configureSelectNotificationSubject(ArticleDetailPage.routeName);
+  }
+
+  @override
+  void dispose() {
+    selectNotificationSubject.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PlatformWidget(androidBuilder: _buildAndroid, iosBuilder: _buildIos);
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: const Text('News App'),
-    //   ),
-    //   body: _buildList(context),
-    // );
   }
 }

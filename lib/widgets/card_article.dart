@@ -1,7 +1,8 @@
-import 'package:codelab2_news_app/ui/article_detail_page.dart';
+import '../ui/article_detail_page.dart';
 import 'package:flutter/material.dart';
 import '../data/model/article.dart';
 import '../common/styles.dart';
+import '../common/navigation.dart';
 
 class CardArticle extends StatelessWidget {
   final Article article;
@@ -19,8 +20,8 @@ class CardArticle extends StatelessWidget {
               child: Image.network(article.urlToImage!, width: 100)),
           title: Text(article.title),
           subtitle: Text(article.author!),
-          onTap: () => Navigator.pushNamed(context, ArticleDetailPage.routeName,
-              arguments: article),
+          onTap: () =>
+              Navigation.intentWithData(ArticleDetailPage.routeName, article),
         ));
   }
 }

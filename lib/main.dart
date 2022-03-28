@@ -1,3 +1,12 @@
+import 'dart:io';
+
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+import './common/navigation.dart';
+
+import './utils/background_service.dart';
+import './utils/notification_helper.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 import './data/preferences/preferences_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,7 +20,23 @@ import './ui/article_detail_page.dart';
 import './ui/article_web_view.dart';
 import './ui/home_page.dart';
 
-void main() {
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final NotificationHelper _notificationHelper = NotificationHelper();
+  final BackgroundService _service = BackgroundService();
+
+  _service.initializeIsolate();
+
+  if (Platform.isAndroid) {
+    await AndroidAlarmManager.initialize();
+  }
+
+  await _notificationHelper.initNotification(flutterLocalNotificationsPlugin);
+
   runApp(const MyApp());
 }
 
@@ -38,6 +63,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'News App',
           theme: provider.themeData,
+          navigatorKey: navigatorKey,
           builder: (context, child) {
             return CupertinoTheme(
                 data: const CupertinoThemeData(),
