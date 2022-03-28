@@ -11,11 +11,11 @@ customDialog(BuildContext context) {
       barrierDismissible: true,
       builder: (context) {
         return CupertinoAlertDialog(
-          title: Text('Coming Soon!'),
-          content: Text('This feature will be coming soon!'),
+          title: const Text('Coming Soon!'),
+          content: const Text('This feature will be coming soon!'),
           actions: [
             CupertinoDialogAction(
-              child: Text('Ok'),
+              child: const Text('Ok'),
               onPressed: () {
                 Navigation.back();
               },
@@ -29,14 +29,14 @@ customDialog(BuildContext context) {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Coming Soon!'),
-          content: Text('This feature will be coming soon!'),
+          title: const Text('Coming Soon!'),
+          content: const Text('This feature will be coming soon!'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigation.back();
               },
-              child: Text('Ok'),
+              child: const Text('Ok'),
             ),
           ],
         );

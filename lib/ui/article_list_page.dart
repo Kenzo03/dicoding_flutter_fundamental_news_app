@@ -34,7 +34,7 @@ class ArticleListPage extends StatelessWidget {
   Widget _buildList(BuildContext context) {
     return Consumer<NewsProvider>(builder: (context, state, _) {
       if (state.state == ResultState.Loading) {
-        return Center(child: CircularProgressIndicator());
+        return const Center(child: CircularProgressIndicator());
       } else if (state.state == ResultState.HasData) {
         return ListView.builder(
             shrinkWrap: true,
@@ -48,7 +48,7 @@ class ArticleListPage extends StatelessWidget {
       } else if (state.state == ResultState.Error) {
         return Center(child: Text(state.message));
       } else {
-        return Center(child: Text(''));
+        return const Center(child: Text(''));
       }
     });
   }
