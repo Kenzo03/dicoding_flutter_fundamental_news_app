@@ -20,29 +20,29 @@ class CardArticle extends StatelessWidget {
           builder: (context, snapshot) {
             var isBookmarked = snapshot.data ?? false;
             return Material(
-                color: primaryColor,
+                // color: primaryColor,
                 child: ListTile(
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  leading: Hero(
-                      tag: article.urlToImage!,
-                      child: Image.network(article.urlToImage!, width: 100)),
-                  title: Text(article.title),
-                  subtitle: Text(article.author!),
-                  trailing: isBookmarked
-                      ? IconButton(
-                          icon: const Icon(Icons.bookmark),
-                          color: Theme.of(context).colorScheme.secondary,
-                          onPressed: () => provider.removeBookmark(article.url),
-                        )
-                      : IconButton(
-                          icon: const Icon(Icons.bookmark_border),
-                          color: Theme.of(context).colorScheme.secondary,
-                          onPressed: () => provider.addBookmark(article),
-                        ),
-                  onTap: () => Navigation.intentWithData(
-                      ArticleDetailPage.routeName, article),
-                ));
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              leading: Hero(
+                  tag: article.urlToImage!,
+                  child: Image.network(article.urlToImage!, width: 100)),
+              title: Text(article.title),
+              subtitle: Text(article.author!),
+              trailing: isBookmarked
+                  ? IconButton(
+                      icon: const Icon(Icons.bookmark),
+                      color: Theme.of(context).colorScheme.secondary,
+                      onPressed: () => provider.removeBookmark(article.url),
+                    )
+                  : IconButton(
+                      icon: const Icon(Icons.bookmark_border),
+                      color: Theme.of(context).colorScheme.secondary,
+                      onPressed: () => provider.addBookmark(article),
+                    ),
+              onTap: () => Navigation.intentWithData(
+                  ArticleDetailPage.routeName, article),
+            ));
           },
         );
       },
